@@ -1,17 +1,22 @@
-package twelvefold.twelvefoldbooter.misc;
+package twelvefold.twelvefoldbooter.api.misc;
 
+import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
+import ichttt.mods.firstaid.api.damagesystem.AbstractPlayerDamageModel;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fml.common.Loader;
 import twelvefold.twelvefoldbooter.api.LateMixinLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class TwelvefoldMisc {
-    public static final Random random=new Random();
+public class TwelvefoldMisc{
+    public static final Random structureRandom=new Random();
     public static Predicate<String> getStringPredicate(LateMixinLoader lateMixinLoader, Class<?> clazz) throws NoSuchMethodException {
         Predicate<String >shouldMixinConfigQueue=x->true;
         String methodName= lateMixinLoader.shouldMixinConfigQueue();
@@ -37,5 +42,19 @@ public class TwelvefoldMisc {
             byteArrayOutputStream.write(buffer,0,read);
         }
         return byteArrayOutputStream.toByteArray();
+    }
+
+    public static float getMinHealth(EntityPlayer entityPlayer)
+    {
+        float minHealth=entityPlayer.getHealth();
+        float maxHealth=entityPlayer.getMaxHealth();
+        if(Loader.isModLoaded("firstaid") && entityPlayer.hasCapability(CapabilityExtendedHealthSystem.INSTANCE,null))
+        {
+            AbstractPlayerDamageModel model=entityPlayer.getCapability(CapabilityExtendedHealthSystem.INSTANCE,null);
+            assert model != null;
+            minHealth=Math.min(minHealth,model.HEAD.currentHealth/model.HEAD.getMaxHealth()*maxHealth);
+            minHealth=Math.min(minHealth,model.BODY.currentHealth/model.BODY.getMaxHealth()*maxHealth);
+        }
+        return minHealth;
     }
 }

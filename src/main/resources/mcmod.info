@@ -8,7 +8,7 @@
   "url": "https://www.curseforge.com/members/repo_ranger/projects",
   "updateUrl": "",
   "authorList": ${mod_author},
-  "credits": "fonnymunkey: The original author\nforestbat:source of the meme\nSnownee:Initial implementation of bathappymod",
+  "credits": "Inspired by fonnymunkey's FermiumBooter. Gradle files adapted from CreanroomMC and GTNH.",
   "logoFile": "icon.png",
   "dependencies": []
 }

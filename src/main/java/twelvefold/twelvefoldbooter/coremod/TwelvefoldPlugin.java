@@ -14,7 +14,8 @@ import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.Mixins;
 import twelvefold.twelvefoldbooter.TwelvefoldBooter;
 import twelvefold.twelvefoldbooter.api.TwelvefoldRegistryAPI;
-import twelvefold.twelvefoldbooter.config.TwelvefoldConfig;
+import twelvefold.twelvefoldbooter.config.TFModConfig;
+import twelvefold.twelvefoldbooter.api.config.TwelvefoldConfig;
 
 @IFMLLoadingPlugin.Name("TwelvefoldBooter")
 @IFMLLoadingPlugin.MCVersion("1.12.2")
@@ -24,7 +25,7 @@ public class TwelvefoldPlugin implements IFMLLoadingPlugin {
 	public static final Logger LOGGER = LogManager.getLogger("TwelvefoldBooter");
 
 	public TwelvefoldPlugin() {
-		TwelvefoldConfig.init((File) FMLInjectionData.data()[6]);
+		TwelvefoldConfig.init((File) FMLInjectionData.data()[6],TwelvefoldBooter.MODID+".json",new TFModConfig());
 		MixinBootstrap.init();
 		MixinExtrasBootstrap.init();
 		Mixins.addConfiguration("mixins.twelvefoldbooter.init.json");
@@ -77,6 +78,7 @@ public class TwelvefoldPlugin implements IFMLLoadingPlugin {
 				Mixins.addConfiguration(entry.getKey());
 			}
 		}
+        Mixins.addConfiguration("mixins.twelvefoldbooter.default.json");
 	}
 	
 	@Override

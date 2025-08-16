@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "twelvefold.twelvefoldbooter.mixin",
+  "refmap": "mixins.twelvefoldbooter.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "mixins": [
+    "MixinWorld"
+  ],
+  "injectors": {
+    "maxShiftBy": 10
+  },
+  "client": [
+    "MixinGuiIngame"
+  ]
+}

@@ -2,17 +2,14 @@ package twelvefold.twelvefoldbooter.mixin;
 
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
-import net.minecraftforge.fml.common.discovery.ModDiscoverer;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import twelvefold.twelvefoldbooter.coremod.TwelvefoldPlugin;
 import twelvefold.twelvefoldbooter.api.TwelvefoldRegistryAPI;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.transformer.ext.Extensions;
 import twelvefold.twelvefoldbooter.api.LateMixinLoader;
-import twelvefold.twelvefoldbooter.misc.TwelvefoldMisc;
+import twelvefold.twelvefoldbooter.api.misc.TwelvefoldMisc;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -132,21 +129,12 @@ public class MixinLoader {
                     Method prepareConfigs = mixinProcessorClass.getDeclaredMethod("prepareConfigs", MixinEnvironment.class, Extensions.class);
                     prepareConfigs.setAccessible(true);
                     prepareConfigs.invoke(processor, MixinEnvironment.getCurrentEnvironment(), extensions);
-                    return;
                 } catch (NoSuchMethodException ex) {
                     // no-op
-                }
-                // Mixin 0.8+
-                try {
-                    Method prepareConfigs = mixinProcessorClass.getDeclaredMethod("prepareConfigs", MixinEnvironment.class);
-                    prepareConfigs.setAccessible(true);
-                    prepareConfigs.invoke(processor, MixinEnvironment.getCurrentEnvironment());
-                    return;
-                } catch (NoSuchMethodException ex) {
-                    // no-op
+                    throw new UnsupportedOperationException("Unsupported Mixin",ex);
                 }
 
-                throw new UnsupportedOperationException("Unsupported Mixin");
+
             }
         }
         catch (Exception ex) {
