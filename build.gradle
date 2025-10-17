@@ -61,7 +61,10 @@ version = "${mod_version}"
 group = "${mod_id}"
 archivesBaseName = '`' + "${mod_name}"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+java.toolchain {
+    languageVersion = JavaLanguageVersion.of(8)
+    vendor = JvmVendorSpec.AZUL
+}
 //java.withSourcesJar()
 //java.withJavadocJar()
 
@@ -80,14 +83,10 @@ minecraft {
 
     // Add various JVM arguments here for runtime
     def args = ["-ea:${project.group}"]
-    if (true) {
-        args << '-Dfml.coreMods.load=' + mixin_loader_class
-    }
-    if (true) {
-        args << '-Dmixin.hotSwap=true'
-        args << '-Dmixin.checks.interfaces=true'
-        args << '-Dmixin.debug.export=true'
-    }
+    args << '-Dfml.coreMods.load=' + mixin_loader_class
+    args << '-Dmixin.hotSwap=true'
+    args << '-Dmixin.checks.interfaces=true'
+    args << '-Dmixin.debug.export=true'
     extraRunJvmArguments.addAll(args)
 
     // Include and use dependencies' Access Transformer files
@@ -111,7 +110,7 @@ dependencies {
     shadow 'io.github.llamalad7:mixinextras-common:0.4.1'
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
-    implementation rfg.deobf('maven.modrinth:firstaid:1.6.22')
+    // implementation rfg.deobf('maven.modrinth:firstaid:1.6.22')
 }
 
 //mixin {

@@ -6,9 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import twelvefold.twelvefoldbooter.TwelvefoldBooter;
-import twelvefold.twelvefoldbooter.api.misc.TwelvefoldMisc;
 
 @Mixin(GuiIngameForge.class)
+@SuppressWarnings("unused")
 public class MixinGuiIngame {
 
     @Redirect(method = "renderHealth",at = @At(value = "INVOKE",target = "Lnet/minecraft/entity/player/EntityPlayer;getHealth()F"),remap = false)
@@ -28,9 +28,9 @@ public class MixinGuiIngame {
             return originalHealth;
         }
 
-        final float minHealth= TwelvefoldMisc.getMinHealth(instance);
+//        final float minHealth= TwelvefoldMisc.getMinHealth(instance);
         final float maxHealth = instance.getMaxHealth();
-        final float Ln = (minHealth - 1.0f) * ((minHealth + 2.0f) / 2.0f) / ((maxHealth - 1.0f) * ((maxHealth + 2.0f) / 2.0f));
+        final float Ln = (originalHealth - 1.0f) * ((originalHealth + 2.0f) / 2.0f) / ((maxHealth - 1.0f) * ((maxHealth + 2.0f) / 2.0f));
         final float moddedHealth = maxHealth * Math.min(1.0f, Ln);
         if(TwelvefoldBooter.config.getModConfig().verboseDebug)
         {

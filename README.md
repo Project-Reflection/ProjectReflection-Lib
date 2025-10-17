@@ -1,17 +1,21 @@
-# TwelvefoldBooter
-TwelvefoldBooter is a mixin mod utility to allow developers to load mixins both early and late, allowing for modifying  
-classes that normally could not be modified otherwise.
+# Alternate Mixin Utilities
 
-## Current features include;
-- Enqueue mixins to be applied both early and late, to allow for for modifying Vanilla/Forge classes, as well as mod classes
-- Enable/disable enqueued mixins prior to application through the use of a Supplier, to allow developer control over optional mixins
-- Disallow other TwelvefoldBooter enqueued mixins from applying, for testing or tweaking purposes
-- Shadows Mixin 0.8.7 and MixinExtras 0.4.1
+---
+This is a fork of [Twelvefold Booter by Twelvefold Studios](https://github.com/twelvefold/TwelvefoldBooter)
 
-## For developer usage:
+The mod is MIT licence, so this is fine.
 
-In your IFMLLoadingPlugin init, instead of `Mixins.addConfiguration("mixinConfigName")`, use `TwelvefoldRegistryAPI.enqueueEarlyMixin("mixinConfigName")`.  
-If you are registering it as a late-loaded mixin use annotation `@LateMixinLoader("mixinConfigName")`.  
-That is all that is required, and TwelvefoldBooter takes care of the rest.
+The main concern has been confirmed removed, and I built the jar myself.
 
-If you have any issues/suggestions/requests, please post them to the Github issue tracker linked above.
+### Current features includes:
+
+*   Enqueue mixins to be applied both early and late, to allow for for modifying Vanilla/Forge classes, as well as mod classes
+*   Enable/disable enqueued mixins prior to application through the use of a Supplier, to allow developer control over optional mixins
+*   Disallow other TwelvefoldBooter enqueued mixins from applying, for testing or tweaking purposes
+*   Shadows Mixin 0.8.7 and MixinExtras 0.4.1
+
+### Additional features added in this fork:
+
+*   An alternative config system
+*   Workaround of [the infamous RANDAR exploit](https://www.youtube.com/watch?v=maMpMOnIJDE)
+*   Alternative health bar curve from [TFBC](https://github.com/twelvefold/TwelvefoldBetterCombat) ~~adapted with First Aid integration~~(removed in 199f2e2c8c1)

@@ -1,9 +1,5 @@
 package twelvefold.twelvefoldbooter.api.misc;
 
-import ichttt.mods.firstaid.api.CapabilityExtendedHealthSystem;
-import ichttt.mods.firstaid.api.damagesystem.AbstractPlayerDamageModel;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.Loader;
 import twelvefold.twelvefoldbooter.api.LateMixinLoader;
 
 import java.io.ByteArrayOutputStream;
@@ -33,6 +29,7 @@ public class TwelvefoldMisc{
         }
         return shouldMixinConfigQueue;
     }
+    @SuppressWarnings("unused")
     public static byte[] readInputStream(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream=new ByteArrayOutputStream();
         byte[] buffer=new byte[4096];
@@ -44,17 +41,17 @@ public class TwelvefoldMisc{
         return byteArrayOutputStream.toByteArray();
     }
 
-    public static float getMinHealth(EntityPlayer entityPlayer)
-    {
-        float minHealth=entityPlayer.getHealth();
-        float maxHealth=entityPlayer.getMaxHealth();
-        if(Loader.isModLoaded("firstaid") && entityPlayer.hasCapability(CapabilityExtendedHealthSystem.INSTANCE,null))
-        {
-            AbstractPlayerDamageModel model=entityPlayer.getCapability(CapabilityExtendedHealthSystem.INSTANCE,null);
-            assert model != null;
-            minHealth=Math.min(minHealth,model.HEAD.currentHealth/model.HEAD.getMaxHealth()*maxHealth);
-            minHealth=Math.min(minHealth,model.BODY.currentHealth/model.BODY.getMaxHealth()*maxHealth);
-        }
-        return minHealth;
-    }
+//    public static float getMinHealth(EntityPlayer entityPlayer)
+//    {
+//        float minHealth=entityPlayer.getHealth();
+//        float maxHealth=entityPlayer.getMaxHealth();
+//        if(Loader.isModLoaded("firstaid") && entityPlayer.hasCapability(CapabilityExtendedHealthSystem.INSTANCE,null))
+//        {
+//            AbstractPlayerDamageModel model=entityPlayer.getCapability(CapabilityExtendedHealthSystem.INSTANCE,null);
+//            assert model != null;
+//            minHealth=Math.min(minHealth,model.HEAD.currentHealth/model.HEAD.getMaxHealth()*maxHealth);
+//            minHealth=Math.min(minHealth,model.BODY.currentHealth/model.BODY.getMaxHealth()*maxHealth);
+//        }
+//        return minHealth;
+//    }
 }
