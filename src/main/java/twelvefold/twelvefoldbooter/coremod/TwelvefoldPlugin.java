@@ -25,7 +25,10 @@ public class TwelvefoldPlugin implements IFMLLoadingPlugin {
 	public static final Logger LOGGER = LogManager.getLogger("TwelvefoldBooter");
 
 	public TwelvefoldPlugin() {
-		TwelvefoldConfig.init((File) FMLInjectionData.data()[6],TwelvefoldBooter.MODID+".json",new TFModConfig());
+		TwelvefoldBooter.config=TwelvefoldConfig.init((File) FMLInjectionData.data()[6],
+                TwelvefoldBooter.MODID+".json",
+                new TFModConfig());
+        assert TwelvefoldBooter.config != null;
 		MixinBootstrap.init();
 		MixinExtrasBootstrap.init();
 		Mixins.addConfiguration("mixins.twelvefoldbooter.init.json");

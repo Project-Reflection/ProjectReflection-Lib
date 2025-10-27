@@ -15,6 +15,10 @@ import java.util.Random;
 @Mixin(World.class)
 public abstract class MixinWorld {
 
+    /**
+     * @author Project Reflection
+     * @reason fix RANDAR exploit
+     */
     @Overwrite
     public Random setRandomSeed(int seedX, int seedY, int seedZ) {
 

@@ -9,7 +9,7 @@ The main concern has been confirmed removed, and I built the jar myself.
 
 ### Current features includes:
 
-*   Enqueue mixins to be applied both early and late, to allow for for modifying Vanilla/Forge classes, as well as mod classes
+*   Enqueue mixins to be applied both early and late, to allow for modifying Vanilla/Forge classes, as well as mod classes
 *   Enable/disable enqueued mixins prior to application through the use of a Supplier, to allow developer control over optional mixins
 *   Disallow other TwelvefoldBooter enqueued mixins from applying, for testing or tweaking purposes
 *   Shadows Mixin 0.8.7 and MixinExtras 0.4.1
