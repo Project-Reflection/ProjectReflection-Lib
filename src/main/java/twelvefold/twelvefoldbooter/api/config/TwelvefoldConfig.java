@@ -17,7 +17,7 @@ public class TwelvefoldConfig<T> {
         readConfig(minecraftHome,configName);
     }
     private void readConfig(File minecraftHome,String configName) {
-        File configFile=new File(minecraftHome, configName);
+        File configFile=new File(minecraftHome, "twelvefold/"+configName);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         if(configFile.isFile())
         {
